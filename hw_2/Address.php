@@ -28,7 +28,7 @@ class Address
       }
       else
       {
-        return $this->name['LAST'].','.$this->name['FIRST'];
+        return $this->name['LAST'].', '.$this->name['FIRST'];
       }
     }
     //void name($value)
@@ -65,11 +65,13 @@ class Address
     return $this;
   }
 
-  //street() prototypes:
-  //string street() returns street in "Address_number street_name" format.
-  //void street(string $value) set object's $street attribute in //"Address_number street_name" format.
-  //void street(array $value) set object's $street attribute in [Address, street] format
-  //void street(int $address, string $street) set object's $street attribute
+  /*
+  street() prototypes:
+  string street() returns street in "Address_number street_name" format.
+  void street(string $value) set object's $street attribute in "Address_number street_name" format.
+  void street(array $value) set object's $street attribute in [Address, street] format
+  void street(int $address, string $street) set object's $street attribute
+  */
   function street()
   {
     //string street()
@@ -103,9 +105,11 @@ class Address
     return $this;
   }
 
-  //city() prototypes
-  //string city() returns the city.
-  //void city(string $value) set object's $city attribute
+  /*
+  city() prototypes
+  string city() returns the city.
+  void city(string $value) set object's $city attribute
+  */
   function city()
   {
     //string city()
@@ -119,9 +123,11 @@ class Address
     return $this;
   }
 
-  //state() prototypes:
-  //string state() returns the state name.
-  //void state(string $value) set object's $state attribute
+  /*
+  state() prototypes:
+  string state() returns the state name.
+  void state(string $value) set object's $state attribute
+  */
   function state()
   {
     //string state()
@@ -135,9 +141,11 @@ class Address
     return $this;
   }
 
-  //zip() prototypes:
-  //int zip() returns the zipcode.
-  //void zip(int $value) set object's $zipCode attribute
+  /*
+  zip() prototypes:
+  int zip() returns the zipcode.
+  void zip(int $value) set object's $zipCode attribute
+  */
   function zip()
   {
     //int zip()
@@ -177,7 +185,6 @@ class Address
   //Returns a tab separated value (TSV) string containing the contents of all instance attributes
   function toTSV()
   {
-    echo $this->name();
     return implode("\t", [$this->name(), $this->street(), $this->city(), $this->state(), $this->zip()]);
   }
 
