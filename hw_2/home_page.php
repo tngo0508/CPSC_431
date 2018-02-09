@@ -91,7 +91,33 @@
       </tr>
     </table>
 
-    <h2 align="center">Player Statistics</h1>
+    <h2 align="center">Team Roster</h2>
+    <?php
+      $dataRecords = file("$document_root/data/teamRoster.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      echo "Number of Records:  ".count($dataRecords)."<br/>";
+    ?>
+    <table style="border:1px solid black; border-collapse:collapse;">
+      <tr>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;"></th>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Player's Name</th>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Street</th>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;">City</th>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;">State</th>
+        <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Zip</th>
+      </tr>
+      <?php
+        foreach($dataRecords as $row=>$record )
+        {
+          echo '<tr>';
+          $values = explode("\t", $record);
+          echo '<td  style="vertical-align:top; border:1px solid black;">'."$row</td>";
+          foreach( $values as $value)  echo '<td style="vertical-align:top; border:1px solid black;">'."$value</td>";
+          echo '</tr>';
+        }
+      ?>
+    </table>
+
+    <h2 align="center">Player Statistics</h2>
     <?php
       $dataRecords = file("$document_root/data/statistics.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       echo "Number of Records:  ".count($dataRecords)."<br/>";
@@ -115,7 +141,7 @@
           echo '</tr>';
         }
       ?>
-    </table
+    </table>
 
   </body>
 </html>
