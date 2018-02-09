@@ -9,9 +9,9 @@ $state = (string) $_POST['state'];
 $zipCode = (int) $_POST['zipCode'];
 $document_root = $_SERVER['DOCUMENT_ROOT'];
 
-require('Address.php')
+$name = "$last_name".', '."$first_name";
+require('Address.php');
 
-$name = "$first_name".', '."$last_name";
 $newPlayer = new Address($name, $street, $city, $state, $zipCode);
 
 if (!empty($name))

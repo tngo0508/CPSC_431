@@ -243,7 +243,7 @@ class PlayerStatistic
 
    // Returns a tab separated value (TSV) string containing the contents of all instance attributes
    function toTSV()
-   { 
+   {
        return implode("\t", [$this->name(), $this->playingTime(), $this->pointsScored(), $this->assists(), $this->rebounds()]);
    }
 

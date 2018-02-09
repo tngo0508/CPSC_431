@@ -20,12 +20,16 @@ class Address
   function name()
   {
     //string name()
-    if (func_get_args() == 0)
+    if (func_num_args() == 0)
     {
       if (empty($this->name['FIRST']))
+      {
         return $this->name['LAST'];
+      }
       else
+      {
         return $this->name['LAST'].','.$this->name['FIRST'];
+      }
     }
     //void name($value)
     else if (func_num_args() == 1)
@@ -45,10 +49,10 @@ class Address
       else if (is_array($value))
       {
         if (count($value) >= 2)
-          $this->name['FIRST'] = htmlspecialchars(trim($value[1]));
+          $this->name['LAST'] = htmlspecialchars(trim($value[1]));
         else
-          $this->name['FIRST'] = '';
-        $this->name['LAST'] = htmlspecialchars(trim($value[0]));
+          $this->name['LAST'] = '';
+        $this->name['FIRST'] = htmlspecialchars(trim($value[0]));
       }
     }
     //void name($first_name, $last_name)
@@ -153,7 +157,7 @@ class Address
     // if $name contains at least one tab character, assume all attributes //are provided in a tab separated list. Otherswise, $name is just the
     //player's name.
 
-    if (strpos($name, "\t") !=== false)
+    if (strpos($name, "\t") !== false)
     {
       list($name, $street, $city, $state, $zipCode) = explode("\t", $name);
     }
@@ -167,12 +171,13 @@ class Address
 
   function __toString()
   {
-    return (var_export($this true));
+    return (var_export($this, true));
   }
 
   //Returns a tab separated value (TSV) string containing the contents of all instance attributes
   function toTSV()
   {
+    echo $this->name();
     return implode("\t", [$this->name(), $this->street(), $this->city(), $this->state(), $this->zip()]);
   }
 
@@ -182,10 +187,10 @@ class Address
     // assign each argument a value from the tab delineated string respecting relative positions
     list($name, $street, $city, $state, $zipCode) = explode("\t", $tsvString);
     $this->name($name);
-    $this->playingTime($street);
-    $this->pointsScored($city);
-    $this->assists($state);
-    $this->rebounds($zipCode);
+    $this->street($street);
+    $this->city($city);
+    $this->state($state);
+    $this->zip($zipCode);
   }
 }
  ?>
