@@ -1,3 +1,5 @@
-Smith, Jane	123 Main	Westminster	CA	98765
-Benedict, Tom	3445 Magnolia	Westminster	CA	96744
+Smith, Jane	123 Main St	Westminster	CA	98765
+Benedict, Tom	3445 Magnolia St	Westminster	CA	96744
 Johnson, Bob	423 7th	San Francisco	CA	78350
+Madison, James	71 Pilgrim Avenue	Chevy Chase	MD	20815
+Ngo, Thomas	7332 Wyoming Street	Orlando	FL	32806

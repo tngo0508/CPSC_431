@@ -93,6 +93,7 @@
 
     <h2 align="center">Team Roster</h2>
     <?php
+      $document_root = $_SERVER['DOCUMENT_ROOT'];
       $dataRecords = file("$document_root/data/teamRoster.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       echo "Number of Records:  ".count($dataRecords)."<br/>";
     ?>
@@ -119,6 +120,7 @@
 
     <h2 align="center">Player Statistics</h2>
     <?php
+      $document_root = $_SERVER['DOCUMENT_ROOT'];
       $dataRecords = file("$document_root/data/statistics.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       echo "Number of Records:  ".count($dataRecords)."<br/>";
     ?>

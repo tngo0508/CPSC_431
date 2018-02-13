@@ -3,7 +3,7 @@ class Address
 {
   //Instance attributes
   private $name = array('FIRST'=>"", 'LAST'=>null);
-  private $street = array('ADDRESS'=>0, 'STREET'=>null);
+  private $street = null;
   private $city = null;
   private $state = null;
   private $zipCode = 0;
@@ -67,41 +67,21 @@ class Address
 
   /*
   street() prototypes:
-  string street() returns street in "Address_number street_name" format.
-  void street(string $value) set object's $street attribute in "Address_number street_name" format.
-  void street(array $value) set object's $street attribute in [Address, street] format
-  void street(int $address, string $street) set object's $street attribute
+  string street() returns street in "Address street" format.
+  void street(string $value) set object's $street attribute in "Address street" format.
   */
   function street()
   {
     //string street()
     if (func_num_args() == 0)
     {
-      return $this->street['ADDRESS'].' '.$this->street['STREET'];
+      return $this->street;
     }
     //void street(string $value)
     else if (func_num_args() == 1)
     {
-      $value = func_get_arg(0);
-
-      if( is_string($value) )
-        $value = explode(' ', $value); // convert string to array
-      if( is_array ($value) )
-      {
-        if ( count($value) >= 2 )
-        {
-          $this->street['ADDRESS'] = (int)$value[0];
-          $this->street['STREET'] = htmlspecialchars(trim($value[1]));
-        }
-      }
+      $this->street = htmlspecialchars(trim(func_get_arg(0)));
     }
-      //void street(int $address, string $street)
-      else if (func_num_args() == 2)
-      {
-        $this->street['ADDRESS'] = (int)func_get_arg(0);
-        $this->street['STREET'] = htmlspecialchars(trim(func_get_arg(1)));
-      }
-
     return $this;
   }
 
@@ -160,7 +140,7 @@ class Address
   }
 
   //constructor
-  function __construct($name="", $street="", $city=null, $state=null, $zipCode=0)
+  function __construct($name="", $street=null, $city=null, $state=null, $zipCode=0)
   {
     // if $name contains at least one tab character, assume all attributes //are provided in a tab separated list. Otherswise, $name is just the
     //player's name.
