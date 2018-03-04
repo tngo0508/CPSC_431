@@ -7,7 +7,7 @@
   <h1>Book-O-Rama Book Entry Results</h1>
   <?php
 
-    if (!isset($_POST['ISBN']) || !isset($_POST['Author']) 
+    if (!isset($_POST['ISBN']) || !isset($_POST['Author'])
          || !isset($_POST['Title']) || !isset($_POST['Price'])) {
        echo "<p>You have not entered all the required details.<br />
              Please go back and try again.</p>";
@@ -40,7 +40,7 @@
         echo "<p>An error has occurred.<br/>
               The item was not added.</p>";
     }
-  
+
     $db->close();
   ?>
 </body>
