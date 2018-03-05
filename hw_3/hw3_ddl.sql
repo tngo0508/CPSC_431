@@ -35,14 +35,14 @@ INSERT INTO TeamRoster VALUES
 (108, 'Phooey', 'Duck', '1-1 Maihama Urayasu', 'Chiba Prefecture', 'Disney Tokyo', 'Japan', NULL),
 (109, 'Della', 'Duck', '77700 Boulevard du Parc', 'Coupvray', 'Disney Paris', 'France', NULL);
 
-CREATE TABLE Statistic
+CREATE TABLE Statistics
 (
   ID INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Player INT(10) UNSIGNED NOT NULL,
   PlayingTimeMin TINYINT(2) UNSIGNED DEFAULT 0,
   PlayingTimeSec TINYINT(2) UNSIGNED DEFAULT 0,
   Points TINYINT(3) UNSIGNED DEFAULT 0,
-  Assits TINYINT(3) UNSIGNED DEFAULT 0,
+  Assists TINYINT(3) UNSIGNED DEFAULT 0,
   Rebounds TINYINT(3) UNSIGNED DEFAULT 0,
 
   CONSTRAINT FK_Player FOREIGN KEY (Player) REFERENCES TeamRoster(ID),
@@ -50,7 +50,7 @@ CREATE TABLE Statistic
   CONSTRAINT CHK_PlayingTimeSec CHECK (PlayingTimeSec < 60)
 );
 
-INSERT INTO Statistic VALUES
+INSERT INTO Statistics VALUES
 (17, 100, 35, 12, 47, 11, 21),
 (18, 102, 13, 22, 13, 1, 3),
 (19, 103, 10, 0, 18, 2, 4),
