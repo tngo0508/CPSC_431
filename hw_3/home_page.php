@@ -1,4 +1,4 @@
-AS<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>CPSC 431 HW-3</title>
@@ -21,7 +21,22 @@ AS<!DOCTYPE html>
 
       // if connection was successful
       // Build query to retrieve player's name, address, and averaged statistics from the joined Team Roster and Statistics tables
-      $query = "SELECT TeamRoster.Name_First, TeamRoster.Name_Last, TeamRoster.Street, TeamRoster.City, TeamRoster.State, TeamRoster.Country, TeamRoster.ZipCode, COUNT(Statistics.Player) AS Avg_Game_Played, AVG(Statistics.PlayingTimeMin) AS Avg_Min, AVG(Statistics.PlayingTimeSec) AS Avg_Sec, AVG(Statistics.Points) AS Avg_Points, AVG(Statistics.Assists) AS Avg_Assists, AVG(Statistics.Rebounds) AS Avg_Rebounds
+      $query =
+      "SELECT
+      TeamRoster.ID,
+      TeamRoster.Name_First,
+      TeamRoster.Name_Last,
+      TeamRoster.Street,
+      TeamRoster.City,
+      TeamRoster.State,
+      TeamRoster.Country,
+      TeamRoster.ZipCode,
+      COUNT(Statistics.Player) AS Avg_Game_Played,
+      AVG(Statistics.PlayingTimeMin) AS Avg_Min,
+      AVG(Statistics.PlayingTimeSec) AS Avg_Sec,
+      AVG(Statistics.Points) AS Avg_Points,
+      AVG(Statistics.Assists) AS Avg_Assists,
+      AVG(Statistics.Rebounds) AS Avg_Rebounds
       FROM TeamRoster LEFT JOIN Statistics ON TeamRoster.ID = Statistics.Player
       GROUP BY TeamRoster.Name_Last, TeamRoster.Name_First
       ORDER BY TeamRoster.Name_Last, TeamRoster.Name_First";
@@ -30,7 +45,7 @@ AS<!DOCTYPE html>
       $stmt = $db->prepare($query);
       $stmt->execute();
       $stmt->store_result();
-      $stmt->bind_result($id, $first_name, $last_name, $street, $city, $state, $country, $zipCode)
+      $stmt->bind_result($id, $first_name, $last_name, $street, $city, $state, $country, $zipCode, $avg_game_played, $avg_min, $avg_sec, $avg_points, $avg_assists, $avg_rebounds);
 
     ?>
 
@@ -102,7 +117,12 @@ AS<!DOCTYPE html>
                     //     the displayed name is retrieved from the Address object
                     //     the value submitted is the unique ID for that player
                     // for example:
-                    //     <option value="101">Duck, Daisy</option>
+                        // <option value="101">Duck, Daisy</option>
+                    while ($stmt->fetch()) {
+                      $name = $last_name.', '.$first_name;
+                      $newPlayer = new Address($name);
+                      echo "<option value=\".$id.\">".$newPlayer->name()."</option>";
+                    }
                   ?>
                 </select></td>
               </tr>
@@ -141,6 +161,7 @@ AS<!DOCTYPE html>
 
     <?php
       // emit the number of rows (records) in the table
+      echo "<p>Number of Records: ".$stmt->num_rows."</p>";
     ?>
 
     <table style="border:1px solid black; border-collapse:collapse;">
