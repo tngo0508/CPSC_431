@@ -218,7 +218,12 @@
             echo "<tr>";
                echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$count."</td>";
                echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->name()."</td>";
-               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->street()."<br/>".$newPlayer->city().", ".$newPlayer->state()." ".$newPlayer->zip()."<br/>".$newPlayer->country()."</td>";
+               if ($zipCode == 0) {
+                 echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->street()."<br/>".$newPlayer->city().", ".$newPlayer->state()."<br/>".$newPlayer->country()."</td>";
+               }
+               else {
+                 echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->street()."<br/>".$newPlayer->city().", ".$newPlayer->state()." ".$newPlayer->zip()."<br/>".$newPlayer->country()."</td>";
+               }
             if ($avg_game_played == 0) {
               echo "<td  style=\"vertical-align:top; border:1px solid black;\">0</td>";
               echo "<td  style=\"border:1px solid black; border-collapse:collapse; background: #e6e6e6;\"></td>";
