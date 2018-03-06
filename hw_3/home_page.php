@@ -207,8 +207,38 @@
         //  </tr>
         //
           // construct Address and PlayerStatistic objects supplying as constructor parameters the retrieved database columns
-
           // Emit table row data using appropriate getters from the Address and PlayerStatistic objects
+          $stmt->data_seek(0); //used to reset to first row
+          $count = 0;
+          while ($stmt->fetch()) {
+            $count++;
+            $name = $last_name.', '.$first_name;
+            $newPlayer = new Address($name, $street, $city, $state, $country, $zipCode);
+            $newStat = new PlayerStatistic();
+            echo "<tr>";
+               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$count."</td>";
+               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->name()."</td>";
+               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->street()."<br/>".$newPlayer->city().", ".$newPlayer->state()." ".$newPlayer->zip()."<br/>".$newPlayer->country()."</td>";
+            if ($avg_game_played == 0) {
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">0</td>";
+              echo "<td  style=\"border:1px solid black; border-collapse:collapse; background: #e6e6e6;\"></td>";
+              echo "<td  style=\"border:1px solid black; border-collapse:collapse; background: #e6e6e6;\"></td>";
+              echo "<td  style=\"border:1px solid black; border-collapse:collapse; background: #e6e6e6;\"></td>";
+              echo "<td  style=\"border:1px solid black; border-collapse:collapse; background: #e6e6e6;\"></td>";
+            }
+            else {
+              $time = "$avg_min".":"."$avg_sec";
+              $newPlayer = new PlayerStatistic($name, $time, $avg_points, $avg_assists, $avg_rebounds);
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$avg_game_played."</td>";
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->playingTime()."</td>";
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->pointsScored()."</td>";
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->assists()."</td>";
+              echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->rebounds()."</td>";
+            }
+
+            echo "</tr>";
+          }
+
       ?>
     </table>
 

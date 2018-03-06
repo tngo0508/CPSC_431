@@ -7,16 +7,11 @@ $assists    = (int) trim(preg_replace("/\t|\R/",' ',$_POST['assists']));
 $rebounds   = (int) trim(preg_replace("/\t|\R/",' ',$_POST['rebounds']));
 $player     = (int) trim(preg_replace("/\t|\R/",' ',$_POST['name_ID']));
 
-$document_root = $_SERVER['DOCUMENT_ROOT'];
+// $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 require_once('PlayerStatistic.php');
 
 $newStat = new PlayerStatistic($time, $points, $assists, $rebounds);
-
-if( ! empty($name) )
-{
-  file_put_contents("$document_root/data/statistics.txt", $newStat->toTSV()."\n", FILE_APPEND | LOCK_EX);
-}
 
 @$db = new mysqli('localhost', 'thomas', 'me123', 'CPSC_431_HW3');
 
@@ -26,21 +21,13 @@ if (mysqli_connect_errno()) {
   exit;
 }
 
-list($playing_time_min, $playing_time_sec) = explode(":", $time);
-// $name = $newStat->name();
-// list($last_name, $first_name) = explode(",", $name);
-// echo "$last_name".', '."$first_name";
-//
-// $query = "SELECT ID FROM TeamRoster WHERE Name_First = ? AND Name_Last = ?";
-// $stmt = $db->prepare($query);
-// $stmt->bind_param('ss', $first_name, $last_name);
-// $stmt->execute();
-// $stmt->store_result();
-// $stmt->bind_result($player);
-//
-// while ($stmt->fetch()) {
-//   echo "$player";
-// }
+if (strpos($time, ":") !== false) {
+  list($playing_time_min, $playing_time_sec) = explode(":", $time);
+}
+else {
+  $playing_time_min = $time;
+  $playing_time_sec = 0;
+}
 
 $query = "INSERT INTO Statistics (Player, PlayingTimeMin, PlayingTimeSec, Points, Assists, Rebounds) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $db->prepare($query);

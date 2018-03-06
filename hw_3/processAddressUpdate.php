@@ -12,17 +12,12 @@ $city = (string) trim(preg_replace("/\t|\R/",' ',$_POST['city']));
 $state = (string) trim(preg_replace("/\t|\R/",' ',$_POST['state']));
 $zipCode = (int) trim(preg_replace("/\t|\R/",' ',$_POST['zipCode']));
 $country = (string) trim(preg_replace("/\t|\R/",' ',$_POST['country']));
-$document_root = $_SERVER['DOCUMENT_ROOT'];
+// $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 $name = "$last_name".', '."$first_name";
 require_once('Address.php');
 
 $newPlayer = new Address($name, $street, $city, $state, $country, $zipCode);
-
-if (!empty($name))
-{
-  file_put_contents("$document_root/data/teamRoster.txt", $newPlayer->toTSV()."\n", FILE_APPEND | LOCK_EX);
-}
 
 @$db = new mysqli('localhost', 'thomas', 'me123', 'CPSC_431_HW3');
 
