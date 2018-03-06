@@ -1,19 +1,17 @@
 <?php
-if (!$_POST['name']) {
-  echo "You have not entered last name which is a required value";
-  exit;
-}
 // create short variable names
-$name       = trim(preg_replace("/\t|\R/",' ',$_POST['name']));
+// $name       = trim(preg_replace("/\t|\R/",' ',$_POST['name']));
 $time       = trim(preg_replace("/\t|\R/",' ',$_POST['time']));
 $points     = (int) trim(preg_replace("/\t|\R/",' ',$_POST['points']));
 $assists    = (int) trim(preg_replace("/\t|\R/",' ',$_POST['assists']));
 $rebounds   = (int) trim(preg_replace("/\t|\R/",' ',$_POST['rebounds']));
+$player     = (int) trim(preg_replace("/\t|\R/",' ',$_POST['name_ID']));
+
 $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 require_once('PlayerStatistic.php');
 
-$newStat = new PlayerStatistic($name, $time, $points, $assists, $rebounds);
+$newStat = new PlayerStatistic($time, $points, $assists, $rebounds);
 
 if( ! empty($name) )
 {
@@ -28,22 +26,21 @@ if (mysqli_connect_errno()) {
   exit;
 }
 
-$time = $newStat->playingTime();
 list($playing_time_min, $playing_time_sec) = explode(":", $time);
-$name = $newStat->name();
-list($last_name, $first_name) = explode(",", $name);
-echo "$last_name".', '."$first_name";
-
-$query = "SELECT ID FROM TeamRoster WHERE Name_First = ? AND Name_Last = ?";
-$stmt = $db->prepare($query);
-$stmt->bind_param('ss', $first_name, $last_name);
-$stmt->execute();
-$stmt->store_result();
-$stmt->bind_result($player);
-
-while ($stmt->fetch()) {
-  echo "$player";
-}
+// $name = $newStat->name();
+// list($last_name, $first_name) = explode(",", $name);
+// echo "$last_name".', '."$first_name";
+//
+// $query = "SELECT ID FROM TeamRoster WHERE Name_First = ? AND Name_Last = ?";
+// $stmt = $db->prepare($query);
+// $stmt->bind_param('ss', $first_name, $last_name);
+// $stmt->execute();
+// $stmt->store_result();
+// $stmt->bind_result($player);
+//
+// while ($stmt->fetch()) {
+//   echo "$player";
+// }
 
 $query = "INSERT INTO Statistics (Player, PlayingTimeMin, PlayingTimeSec, Points, Assists, Rebounds) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $db->prepare($query);

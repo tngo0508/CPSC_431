@@ -46,7 +46,6 @@
       $stmt->execute();
       $stmt->store_result();
       $stmt->bind_result($id, $first_name, $last_name, $street, $city, $state, $country, $zipCode, $avg_game_played, $avg_min, $avg_sec, $avg_points, $avg_assists, $avg_rebounds);
-
     ?>
 
     <table style="width: 100%; border:0px solid black; border-collapse:collapse;">
@@ -121,7 +120,7 @@
                     while ($stmt->fetch()) {
                       $name = $last_name.', '.$first_name;
                       $newPlayer = new Address($name);
-                      echo "<option value=\".$id.\">".$newPlayer->name()."</option>";
+                      echo "<option value=\"$id\">".$newPlayer->name()."</option>";
                     }
                   ?>
                 </select></td>
