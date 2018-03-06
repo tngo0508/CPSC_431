@@ -31,14 +31,6 @@ $stmt = $db->prepare($query);
 $stmt->bind_param('dddddd', $player, $playing_time_min, $playing_time_sec, $points, $assists, $rebounds);
 $stmt->execute();
 
-//used for debugging
-if ($stmt->affected_rows > 0) {
-    echo  "<p>A new statistics record was inserted into the database.</p>";
-} else {
-    echo "<p>An error has occurred.<br/>
-          The record was not added.</p>";
-}
-
 $db->close();
 
 require_once('home_page.php');
