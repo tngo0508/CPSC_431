@@ -1,13 +1,10 @@
 <?php
 // create short variable names
-// $name       = trim(preg_replace("/\t|\R/",' ',$_POST['name']));
 $time       = trim(preg_replace("/\t|\R/",' ',$_POST['time']));
 $points     = (int) trim(preg_replace("/\t|\R/",' ',$_POST['points']));
 $assists    = (int) trim(preg_replace("/\t|\R/",' ',$_POST['assists']));
 $rebounds   = (int) trim(preg_replace("/\t|\R/",' ',$_POST['rebounds']));
 $player     = (int) trim(preg_replace("/\t|\R/",' ',$_POST['name_ID']));
-
-// $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 require_once('PlayerStatistic.php');
 
@@ -34,6 +31,7 @@ $stmt = $db->prepare($query);
 $stmt->bind_param('dddddd', $player, $playing_time_min, $playing_time_sec, $points, $assists, $rebounds);
 $stmt->execute();
 
+//used for debugging
 if ($stmt->affected_rows > 0) {
     echo  "<p>A new statistics record was inserted into the database.</p>";
 } else {

@@ -1,9 +1,4 @@
 <?php
-if (!$_POST['lastName']) {
-  echo "You have not entered last name which is a required value";
-  exit;
-}
-
 //create short variable names
 $first_name = trim(preg_replace("/\t|\R/",' ',$_POST['firstName']));
 $last_name = trim(preg_replace("/\t|\R/",' ',$_POST['lastName']));
@@ -12,7 +7,6 @@ $city = (string) trim(preg_replace("/\t|\R/",' ',$_POST['city']));
 $state = (string) trim(preg_replace("/\t|\R/",' ',$_POST['state']));
 $zipCode = (int) trim(preg_replace("/\t|\R/",' ',$_POST['zipCode']));
 $country = (string) trim(preg_replace("/\t|\R/",' ',$_POST['country']));
-// $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 $name = "$last_name".', '."$first_name";
 require_once('Address.php');
@@ -32,6 +26,7 @@ $stmt = $db->prepare($query);
 $stmt->bind_param('ssssssd', $first_name, $last_name, $street, $city, $state, $country, $zipCode);
 $stmt->execute();
 
+//used for debugging
 if ($stmt->affected_rows > 0) {
     echo  "<p>Name and Address inserted into the database.</p>";
 } else {
