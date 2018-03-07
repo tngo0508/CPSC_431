@@ -1,19 +1,35 @@
 <?php
 //create short variable names
-$first_name = trim(preg_replace("/\t|\R/",' ',$_POST['firstName']));
-$last_name = trim(preg_replace("/\t|\R/",' ',$_POST['lastName']));
+$first_name =(string) trim(preg_replace("/\t|\R/",' ',$_POST['firstName']));
+$last_name =(string) trim(preg_replace("/\t|\R/",' ',$_POST['lastName']));
 $street = (string) trim(preg_replace("/\t|\R/",' ',$_POST['street']));
 $city = (string) trim(preg_replace("/\t|\R/",' ',$_POST['city']));
 $state = (string) trim(preg_replace("/\t|\R/",' ',$_POST['state']));
 $zipCode = (int) trim(preg_replace("/\t|\R/",' ',$_POST['zipCode']));
 $country = (string) trim(preg_replace("/\t|\R/",' ',$_POST['country']));
 
-$name = "$last_name".', '."$first_name";
 require_once('Address.php');
 
+$name = "$last_name".', '."$first_name";
 if (!($last_name == "")) {
-  $newPlayer = new Address($name, $street, $city, $state, $country, $zipCode);
-
+  if ($first_name == "") {
+    $first_name = null;
+  }
+  if ($street == "") {
+    $street = null;
+  }
+  if ($city == "") {
+    $city = null;
+  }
+  if ($state == "") {
+    $state = null;
+  }
+  if ($zipCode == 0) {
+    $zipCode = null;
+  }
+  if ($country == "") {
+    $country = null;
+  }
   @$db = new mysqli('localhost', 'thomas', 'me123', 'CPSC_431_HW3');
 
   if (mysqli_connect_errno()) {
@@ -24,7 +40,7 @@ if (!($last_name == "")) {
 
   $query = "INSERT INTO TeamRoster (Name_First, Name_Last, Street, City, State, Country, ZipCode) VALUES (?, ?, ?, ?, ?, ?, ?)";
   $stmt = $db->prepare($query);
-  $stmt->bind_param('ssssssd', $first_name, $last_name, $street, $city, $state, $country, $zipCode);
+  $stmt->bind_param('sssssss', $first_name, $last_name, $street, $city, $state, $country, $zipCode);
   $stmt->execute();
 
   $db->close();
