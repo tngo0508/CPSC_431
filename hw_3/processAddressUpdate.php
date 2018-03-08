@@ -5,7 +5,7 @@ $last_name =(string) trim(preg_replace("/\t|\R/",' ',$_POST['lastName']));
 $street = (string) trim(preg_replace("/\t|\R/",' ',$_POST['street']));
 $city = (string) trim(preg_replace("/\t|\R/",' ',$_POST['city']));
 $state = (string) trim(preg_replace("/\t|\R/",' ',$_POST['state']));
-$zipCode = (int) trim(preg_replace("/\t|\R/",' ',$_POST['zipCode']));
+$zipCode = (string) trim(preg_replace("/\t|\R/",' ',$_POST['zipCode']));
 $country = (string) trim(preg_replace("/\t|\R/",' ',$_POST['country']));
 
 require_once('Address.php');
@@ -26,7 +26,7 @@ if ($city == "") {
 if ($state == "") {
   $state = null;
 }
-if ($zipCode == 0) {
+if ($zipCode == "") {
   $zipCode = null;
 }
 if ($country == "") {

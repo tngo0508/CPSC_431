@@ -6,7 +6,7 @@ class Address
   private $street = null;
   private $city = null;
   private $state = null;
-  private $zipCode = 0;
+  private $zipCode = null;
   private $country = null;
 
   //Operations
@@ -135,7 +135,7 @@ class Address
 
     //void zip(int $value)
     else if (func_num_args() == 1)
-      $this->zipCode = (int)func_get_arg(0);
+      $this->zipCode = htmlspecialchars(trim(func_get_arg(0)));
 
     return $this;
   }
@@ -153,7 +153,7 @@ class Address
   }
 
   //constructor
-  function __construct($name="", $street=null, $city=null, $state=null, $country=null, $zipCode=0)
+  function __construct($name="", $street=null, $city=null, $state=null, $country=null, $zipCode=null)
   {
     // if $name contains at least one tab character, assume all attributes //are provided in a tab separated list. Otherswise, $name is just the
     //player's name.
