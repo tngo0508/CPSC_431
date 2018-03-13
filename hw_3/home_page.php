@@ -118,8 +118,7 @@
                     // for example:
                         // <option value="101">Duck, Daisy</option>
                     while ($stmt->fetch()) {
-                      $name = $last_name.', '.$first_name;
-                      $newPlayer = new Address($name);
+                      $newPlayer = new Address([$first_name, $last_name]);
                       echo "<option value=\"$id\">".$newPlayer->name()."</option>";
                     }
                   ?>
@@ -212,8 +211,7 @@
           $count = 0;
           while ($stmt->fetch()) {
             $count++;
-            $name = $last_name.', '.$first_name;
-            $newPlayer = new Address($name, $street, $city, $state, $country, $zipCode);
+            $newPlayer = new Address([$first_name, $last_name], $street, $city, $state, $country, $zipCode);
             $newStat = new PlayerStatistic();
             echo "<tr>";
                echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$count."</td>";
@@ -233,7 +231,7 @@
             }
             else {
               $time = "$avg_min".":"."$avg_sec";
-              $newPlayer = new PlayerStatistic($name, $time, $avg_points, $avg_assists, $avg_rebounds);
+              $newPlayer = new PlayerStatistic([$first_name, $last_name], $time, $avg_points, $avg_assists, $avg_rebounds);
               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$avg_game_played."</td>";
               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->playingTime()."</td>";
               echo "<td  style=\"vertical-align:top; border:1px solid black;\">".$newPlayer->pointsScored()."</td>";

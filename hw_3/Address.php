@@ -155,14 +155,7 @@ class Address
   //constructor
   function __construct($name="", $street=null, $city=null, $state=null, $country=null, $zipCode=null)
   {
-    // if $name contains at least one tab character, assume all attributes //are provided in a tab separated list. Otherswise, $name is just the
-    //player's name.
-
-    if (strpos($name, "\t") !== false)
-    {
-      list($name, $street, $city, $state, $country, $zipCode) = explode("\t", $name);
-    }
-
+    
     $this->name($name);
     $this->street($street);
     $this->city($city);

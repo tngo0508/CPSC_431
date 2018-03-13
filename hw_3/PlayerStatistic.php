@@ -208,11 +208,11 @@ class PlayerStatistic
      // if $name contains at least one tab character, assume all attributes are provided in
      // a tab separated list.  Otherwise assume $name is just the player's name.
 
-     if( strpos($name, "\t") !== false) // Note, can't check for "true" because strpos() only returns the boolean value "false", never "true"
-     {
-       // assign each argument a value from the tab delineated string respecting relative positions
-       list($name, $time, $points, $assists, $rebounds) = explode("\t", $name);
-     }
+     // if( strpos($name, "\t") !== false) // Note, can't check for "true" because strpos() only returns the boolean value "false", never "true"
+     // {
+     //   // assign each argument a value from the tab delineated string respecting relative positions
+     //   list($name, $time, $points, $assists, $rebounds) = explode("\t", $name);
+     // }
 
      // delegate setting attributes so validation logic is applied
      $this->name($name);
