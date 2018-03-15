@@ -21,7 +21,7 @@ CREATE TABLE TeamRoster
 );
 
 CREATE INDEX lastname ON TeamRoster(Name_Last);
-CREATE INDEX fullname ON TeamRoster(Name_First, Name_Last);
+CREATE UNIQUE INDEX fullname ON TeamRoster(Name_First, Name_Last);
 
 INSERT INTO TeamRoster VALUES
 (100, 'Donald', 'Duck', '1313 S. Harbor Blvd.', 'Anaheim', 'CA', 'USA', '92808-3232'),
